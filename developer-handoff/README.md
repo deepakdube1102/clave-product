@@ -67,7 +67,7 @@ The handoff documentation is divided into 12 comprehensive modules:
 | 04 | [Authentication & Security](./04-AUTHENTICATION-SECURITY.md) | Supabase/JWT auth flow, user context dependency, ownership guards, rate limits, CORS |
 | 05 | [AI Service Architecture](./05-AI-SERVICE-ARCHITECTURE.md) | `AIService` interface, system prompts, anti-fabrication guards, structured JSON output schemas |
 | 06 | [File Upload Pipeline](./06-FILE-UPLOAD-PIPELINE.md) | PDF/DOCX validation, 10MB limits, storage, text extraction, and resume parsing pipeline |
-| 07 | [Subscription & Usage](./07-SUBSCRIPTION-USAGE.md) | Plan models (Free, Single ₹49, Monthly ₹199), server-side quota tracking, access guards |
+| 07 | [Subscription & Usage](./07-SUBSCRIPTION-USAGE.md) | Plan models (Free, Single ₹49, Monthly ₹99), server-side quota tracking, access guards |
 | 08 | [Project Structure](./08-PROJECT-STRUCTURE.md) | Standard FastAPI production codebase structure, modular service layers, dependency injection |
 | 09 | [Environment Variables](./09-ENV-VARIABLES.md) | Environment configuration reference and complete `.env.example` |
 | 10 | [Test Plan](./10-TEST-PLAN.md) | Pytest test suite, ownership isolation tests, boundary tests, mock AI fixtures |

@@ -25,7 +25,7 @@ This document details all configuration parameters required to run the Clave bac
 | `AWS_ACCESS_KEY_ID` | Optional | - | AWS access key for S3 |
 | `AWS_SECRET_ACCESS_KEY` | Optional | - | AWS secret key for S3 |
 | `AWS_REGION` | Optional | `us-east-1` | AWS S3 region |
-| `RAZORPAY_KEY_ID` | Optional | - | Razorpay API key for Indian rupee payments (₹49, ₹199) |
+| `RAZORPAY_KEY_ID` | Optional | - | Razorpay API key for Indian rupee payments (₹49, ₹99) |
 | `RAZORPAY_KEY_SECRET` | Optional | - | Razorpay secret key |
 | `CORS_ORIGINS` | No | `["http://localhost:5173"]` | JSON list of allowed origin URLs |
 
@@ -73,7 +73,7 @@ AWS_ACCESS_KEY_ID=your-aws-access-key-id
 AWS_SECRET_ACCESS_KEY=your-aws-secret-access-key
 AWS_REGION=ap-south-1
 
-# Payments (Razorpay for ₹49 Single / ₹199 Monthly plans)
+# Payments (Razorpay for ₹49 Single / ₹99 Monthly plans)
 RAZORPAY_KEY_ID=rzp_test_your_key_id
 RAZORPAY_KEY_SECRET=your_razorpay_key_secret
 

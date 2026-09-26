@@ -738,9 +738,9 @@ When a Free user attempts to create a 2nd resume, or a user with 0 balance attem
       },
       "monthly": {
         "name": "Monthly Unlimited",
-        "price": 199,
+        "price": 99,
         "currency": "INR",
-        "description": "₹199 per month"
+        "description": "₹99 per month"
       }
     }
   }

@@ -10,7 +10,7 @@ This document specifies the plan models, quota calculation logic, and server-sid
 |---|---|---|---|
 | **Free** | ₹0 | 1 resume lifetime allowance | Full access to Career Profile, ATS analysis, and job browsing |
 | **Single Resume** | ₹49 / resume | +1 resume credit per purchase | 1 tailored/AI resume creation credit with full export capabilities |
-| **Monthly Unlimited** | ₹199 / month | Unlimited resumes | Unlimited resume generation, tailoring, ATS analysis, and job matching |
+| **Monthly Unlimited** | ₹99 / month | Unlimited resumes | Unlimited resume generation, tailoring, ATS analysis, and job matching |
 
 ---
 
@@ -75,7 +75,7 @@ async def enforce_resume_creation_quota(
                     "message": "You have reached your free tier allowance of 1 resume. Please upgrade or purchase a single resume credit to create more.",
                     "plans": {
                         "single": {"price": 49, "currency": "INR"},
-                        "monthly": {"price": 199, "currency": "INR"}
+                        "monthly": {"price": 99, "currency": "INR"}
                     }
                 }
             }

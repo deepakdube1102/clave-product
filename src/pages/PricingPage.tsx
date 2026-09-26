@@ -77,7 +77,7 @@ const FAQ_ITEMS = [
       'Monthly Unlimited allows you to create and tailor as many resumes as you need during your active subscription.',
   },
   {
-    question: 'Can I cancel the ₹199 monthly plan?',
+    question: 'Can I cancel the ₹99 monthly plan?',
     answer:
       'Yes. You can cancel your monthly subscription according to the cancellation terms shown at checkout.',
   },
@@ -222,7 +222,7 @@ export function PricingPage() {
                 </p>
 
                 <div className="mt-4 flex items-baseline gap-1.5">
-                  <span className="text-4xl sm:text-[44px] font-bold tracking-tight text-[#F5F7F6]">₹199</span>
+                  <span className="text-4xl sm:text-[44px] font-bold tracking-tight text-[#F5F7F6]">₹99</span>
                   <span className="text-xs sm:text-sm text-[#A7B5B1]">per month</span>
                 </div>
 

@@ -399,4 +399,4 @@ Returns current plan details and remaining allowances.
 ### `POST /api/subscriptions/checkout`
 Initializes a payment session for:
 - Single Resume: `₹49`
-- Monthly Unlimited: `₹199 / month`
+- Monthly Unlimited: `₹99 / month`
