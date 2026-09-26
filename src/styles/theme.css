@@ -1,0 +1,532 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Brand + neutrals */
+  --color-primary: #087f5b;
+  --color-primary-deep: #056b4d;
+  --color-primary-on-dark: #3ecf9a;
+  --color-teal: #10b981;
+  --color-chip: #edf2ef;
+  --color-sidebar-text: #9fb5af;
+  --color-dark: #061a18;
+  --color-background: #f5f7f6;
+  --color-surface: #ffffff;
+  --color-text: #111312;
+  --color-secondary: #626967;
+  --color-muted: #8a918e;
+  --color-border: #dde5e1;
+
+  /* Status */
+  --color-success: #087f5b;
+  --color-warning: #b7791f;
+  --color-error: #c53030;
+  --color-error-deep: #9b2c2c;
+  --color-info: #2563eb;
+
+  /* Typography */
+  --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-editorial: 'Newsreader', ui-serif, Georgia, serif;
+
+  /* Spacing: 4px base (p-2 = 8, p-3 = 12, p-4 = 16, p-6 = 24, p-8 = 32, p-12 = 48) */
+  --spacing: 0.25rem;
+
+  /* Radius */
+  --radius-control: 8px;
+  --radius-default: 12px;
+  --radius-large: 16px;
+
+  /* Shadows: subtle only */
+  --shadow-xs: 0 1px 2px rgb(17 19 18 / 0.05);
+  --shadow-sm: 0 1px 3px rgb(17 19 18 / 0.06), 0 1px 2px rgb(17 19 18 / 0.04);
+  --shadow-card: 0 1px 2px rgb(6 26 24 / 0.04), 0 6px 18px -6px rgb(6 26 24 / 0.08);
+  --shadow-brand: 0 6px 16px -6px rgb(8 127 91 / 0.55), 0 1px 2px rgb(8 127 91 / 0.25);
+  --shadow-popover: 0 8px 24px -4px rgb(17 19 18 / 0.1), 0 2px 6px rgb(17 19 18 / 0.05);
+
+  /* Layout */
+  --sidebar-width: 240px;
+  --sidebar-rail-width: 72px;
+  --navbar-height: 62px;
+}
+
+/* Brand surfaces. Emerald-to-teal gradients are reserved for primary actions and a few featured areas. */
+@utility bg-brand {
+  background-image: linear-gradient(135deg, #087f5b 0%, #10b981 100%);
+}
+
+@utility bg-brand-feature {
+  background-color: #056b4d;
+  background-image:
+    radial-gradient(620px 260px at 92% -25%, rgb(16 185 129 / 0.5), transparent 70%),
+    linear-gradient(135deg, #056b4d 0%, #087f5b 100%);
+}
+
+@utility bg-tint {
+  background-color: #f6fbf8;
+  background-image: linear-gradient(180deg, #eef8f3 0%, #fbfefd 100%);
+}
+
+@utility bg-sidebar {
+  background-color: #061a18;
+  background-image:
+    radial-gradient(460px 300px at 0% 0%, rgb(16 185 129 / 0.16), transparent 70%),
+    radial-gradient(500px 300px at 100% 110%, rgb(8 127 91 / 0.22), transparent 70%),
+    linear-gradient(180deg, #071b19 0%, #061a18 100%);
+}
+
+@utility bg-canvas {
+  background-color: #f5f7f6;
+  background-image: radial-gradient(900px 420px at 100% -8%, rgb(16 185 129 / 0.09), transparent 65%);
+}
+
+@utility icon-tile {
+  color: var(--color-primary);
+  background-image: linear-gradient(135deg, #e3f4ec, #f5fbf8);
+  box-shadow: inset 0 0 0 1px rgb(8 127 91 / 0.16);
+}
+
+@utility nav-active {
+  background-image: linear-gradient(90deg, rgb(8 127 91 / 0.4), rgb(8 127 91 / 0.06));
+  box-shadow: inset 2px 0 0 var(--color-primary-on-dark);
+}
+
+@utility section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  &::before {
+    content: '';
+    width: 3px;
+    height: 14px;
+    border-radius: 9999px;
+    background-image: linear-gradient(180deg, #10b981, #087f5b);
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .surface-dark :focus-visible {
+    outline-color: var(--color-primary-on-dark);
+  }
+}
+
+@keyframes job-fade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.job-fade {
+  animation: job-fade 160ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .job-fade {
+    animation: none;
+  }
+}
+
+/* Assistant visual: slow, quiet motion. Individual transform properties keep each card's tilt intact. */
+@keyframes float-y {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -9px;
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+    scale: 1;
+  }
+  50% {
+    opacity: 1;
+    scale: 1.08;
+  }
+}
+
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -16;
+  }
+}
+
+@keyframes spark-breathe {
+  0%,
+  100% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.06;
+  }
+}
+
+.anim-float {
+  animation: float-y 6s ease-in-out infinite;
+}
+
+.anim-glow {
+  animation: glow-pulse 7s ease-in-out infinite;
+}
+
+.anim-dash {
+  animation: dash-flow 2.4s linear infinite;
+}
+
+.anim-breathe {
+  animation: spark-breathe 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-float,
+  .anim-glow,
+  .anim-dash,
+  .anim-breathe {
+    animation: none;
+  }
+}
+
+@keyframes wave-bar {
+  0%,
+  100% {
+    scale: 1 0.45;
+  }
+  50% {
+    scale: 1 1;
+  }
+}
+
+.anim-wave {
+  animation: wave-bar 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-wave {
+    animation: none;
+  }
+}
+
+/* App background: a few very light blobs that drift slowly behind every page. */
+@keyframes drift-a {
+  0%,
+  100% {
+    translate: 0 0;
+    scale: 1;
+  }
+  50% {
+    translate: 9vw 7vh;
+    scale: 1.15;
+  }
+}
+
+@keyframes drift-b {
+  0%,
+  100% {
+    translate: 0 0;
+    scale: 1.1;
+  }
+  50% {
+    translate: -8vw -9vh;
+    scale: 0.95;
+  }
+}
+
+@keyframes drift-c {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 6vw -6vh;
+  }
+}
+
+.anim-drift-a {
+  animation: drift-a 26s ease-in-out infinite;
+}
+
+.anim-drift-b {
+  animation: drift-b 32s ease-in-out infinite;
+}
+
+.anim-drift-c {
+  animation: drift-c 38s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-drift-a,
+  .anim-drift-b,
+  .anim-drift-c {
+    animation: none;
+  }
+}
+
+/* Sidebar backdrop: slow drift only, 12-18s loops. Nothing here is meant to be noticed consciously. */
+@keyframes leaf-drift-a {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  50% {
+    translate: -9px 12px;
+    rotate: 2.5deg;
+  }
+}
+
+@keyframes leaf-drift-b {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  50% {
+    translate: 10px -10px;
+    rotate: -2.5deg;
+  }
+}
+
+@keyframes backdrop-glow {
+  0%,
+  100% {
+    translate: 0 0;
+    scale: 1;
+    opacity: 0.85;
+  }
+  50% {
+    translate: 14px -18px;
+    scale: 1.12;
+    opacity: 1;
+  }
+}
+
+.anim-leaf-a {
+  animation: leaf-drift-a 16s ease-in-out infinite;
+}
+
+.anim-leaf-b {
+  animation: leaf-drift-b 14s ease-in-out infinite;
+}
+
+.anim-backdrop-glow {
+  animation: backdrop-glow 18s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-leaf-a,
+  .anim-leaf-b,
+  .anim-backdrop-glow {
+    animation: none;
+  }
+}
+
+@keyframes sidebar-gradient-shift {
+  0% {
+    background-position: 50% 0%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 50% 0%;
+  }
+}
+
+.anim-sidebar-gradient {
+  animation: sidebar-gradient-shift 16s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-sidebar-gradient {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   Clave Marketing Smooth Page Transitions & Micro-Interactions
+   ========================================================================== */
+
+/* 1. Root & background stability (prevent any white/black flash) */
+html {
+  background-color: #030706;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  background-color: #030706;
+  color: #F5F7F6;
+}
+
+/* 2. View Transitions API (Chrome, Edge, Safari 18+, Firefox) */
+::view-transition-old(root) {
+  animation: clave-page-fade-out 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+::view-transition-new(root) {
+  animation: clave-page-fade-in 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Persistent navbar stays pinned and rock-solid during view transitions */
+.marketing-header-persistent {
+  view-transition-name: marketing-header;
+}
+
+::view-transition-old(marketing-header),
+::view-transition-new(marketing-header) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+@keyframes clave-page-fade-out {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes clave-page-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 3. React / CSS Fallback Animation */
+.clave-page-transition {
+  animation: clave-page-fade-in 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: opacity, transform;
+}
+
+/* 4. Subtle Content Entrance Animations (Hero) */
+@keyframes clave-entrance-eyebrow {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes clave-entrance-heading {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes clave-entrance-subtext {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes clave-entrance-cta {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-entrance-eyebrow {
+  animation: clave-entrance-eyebrow 500ms cubic-bezier(0.22, 1, 0.36, 1) 0ms both;
+}
+
+.animate-entrance-heading {
+  animation: clave-entrance-heading 550ms cubic-bezier(0.22, 1, 0.36, 1) 60ms both;
+}
+
+.animate-entrance-subtext {
+  animation: clave-entrance-subtext 550ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+}
+
+.animate-entrance-cta {
+  animation: clave-entrance-cta 550ms cubic-bezier(0.22, 1, 0.36, 1) 180ms both;
+}
+
+/* 5. CTA Micro-interactions */
+.btn-micro-interact,
+button.btn-micro-interact,
+a.btn-micro-interact {
+  transition: transform 160ms cubic-bezier(0.22, 1, 0.36, 1), background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease, color 160ms ease;
+}
+.btn-micro-interact:hover {
+  transform: translateY(-1px);
+}
+.btn-micro-interact:active {
+  transform: translateY(0);
+}
+
+/* 6. Accessibility: Reduced Motion overrides */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-old(marketing-header),
+  ::view-transition-new(marketing-header) {
+    animation: none !important;
+  }
+  .clave-page-transition,
+  .animate-entrance-eyebrow,
+  .animate-entrance-heading,
+  .animate-entrance-subtext,
+  .animate-entrance-cta,
+  .btn-micro-interact {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
